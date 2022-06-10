@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Component, ViewChild } from '@angular/core';
 import { SelectGridEditorComponent } from '@craigsh/libs/grid-editors';
 import { AgGridAngular } from 'ag-grid-angular';
-import { ColDef, GridReadyEvent, CellClickedEvent, GridOptions } from 'ag-grid-community';
+import { ColDef, GridOptions, GridReadyEvent } from 'ag-grid-community';
 import { Observable } from 'rxjs';
 
 type Car = {
@@ -19,13 +19,9 @@ type Car = {
 			<button mat-raised-button (click)="clearSelection()">Clear Selection</button>
 
 			<div class="theme-select">
-				<label id="example-radio-group-label">Pick theme</label>
-				<mat-radio-group
-					aria-labelledby="example-radio-group-label"
-					class="example-radio-group"
-					[(ngModel)]="themeClass"
-				>
-					<mat-radio-button class="example-radio-button" *ngFor="let cls of themeClasses" [value]="cls">
+				<label id="group-label">Pick theme</label>
+				<mat-radio-group aria-labelledby="group-label" [(ngModel)]="themeClass">
+					<mat-radio-button *ngFor="let cls of themeClasses" [value]="cls">
 						{{ cls }}
 					</mat-radio-button>
 				</mat-radio-group>
@@ -86,7 +82,7 @@ export class AppComponent {
 			editable: true,
 			cellEditor: SelectGridEditorComponent,
 			cellEditorParams: {
-				vegetables: ['Boxter', 'Celica', 'Mondeo', 'Sierra', 'Venga'],
+				options: ['Boxter', 'Celica', 'Mondeo', 'Sierra', 'Venga'],
 			},
 		},
 		{ field: 'price', headerName: 'Price' },
@@ -101,7 +97,6 @@ export class AppComponent {
 	public gridOptions: GridOptions = {
 		suppressClickEdit: false,
 		stopEditingWhenCellsLoseFocus: true,
-		onCellClicked: this.onCellClicked.bind(this),
 	};
 
 	// Data that gets displayed in the grid
@@ -116,11 +111,6 @@ export class AppComponent {
 	// eslint-disable-next-line @typescript-eslint/no-unused-vars
 	onGridReady(params: GridReadyEvent) {
 		this.rowData$ = this.http.get<Car[]>('https://www.ag-grid.com/example-assets/row-data.json');
-	}
-
-	// Example of consuming Grid Event
-	onCellClicked(e: CellClickedEvent): void {
-		console.log('cellClicked', e);
 	}
 
 	// Example using Grid's API
