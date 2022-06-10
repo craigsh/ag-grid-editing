@@ -1,7 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, ViewChild } from '@angular/core';
+import { SelectGridEditorComponent } from '@craigsh/libs/grid-editors';
 import { AgGridAngular } from 'ag-grid-angular';
-import { ColDef, GridReadyEvent, CellClickedEvent } from 'ag-grid-community';
+import { ColDef, GridReadyEvent, CellClickedEvent, GridOptions } from 'ag-grid-community';
 import { Observable } from 'rxjs';
 
 type Car = {
@@ -16,19 +17,32 @@ type Car = {
 		<!-- Button to clear selection -->
 		<div class="buttons">
 			<button mat-raised-button (click)="clearSelection()">Clear Selection</button>
+
+			<div class="theme-select">
+				<label id="example-radio-group-label">Pick theme</label>
+				<mat-radio-group
+					aria-labelledby="example-radio-group-label"
+					class="example-radio-group"
+					[(ngModel)]="themeClass"
+				>
+					<mat-radio-button class="example-radio-button" *ngFor="let cls of themeClasses" [value]="cls">
+						{{ cls }}
+					</mat-radio-button>
+				</mat-radio-group>
+			</div>
 		</div>
 
 		<!-- AG Grid Angular Component -->
 		<ag-grid-angular
 			style="width: 100%; height: 100%"
-			class="ag-theme-alpine"
+			[class]="themeClass"
 			[columnDefs]="columnDefs"
 			[defaultColDef]="defaultColDef"
 			[rowData]="rowData$ | async"
 			[rowSelection]="'multiple'"
 			[animateRows]="true"
+			[gridOptions]="gridOptions"
 			(gridReady)="onGridReady($event)"
-			(cellClicked)="onCellClicked($event)"
 		></ag-grid-angular>
 	`,
 	styles: [
@@ -39,18 +53,55 @@ type Car = {
 				height: 100%;
 				gap: 1rem;
 				grid-template-rows: auto 1fr;
+
+				.buttons {
+					display: flex;
+					align-items: center;
+
+					.theme-select {
+						padding-left: 1rem;
+						label {
+							margin-right: 1rem;
+						}
+
+						mat-radio-button {
+							margin: 0.5rem;
+						}
+					}
+				}
 			}
 		`,
 	],
 })
 export class AppComponent {
+	themeClasses = ['ag-theme-alpine', 'ag-theme-custom-angular'];
+	themeClass = 'ag-theme-alpine';
+
 	// Each Column Definition results in one Column.
-	public columnDefs: ColDef[] = [{ field: 'make' }, { field: 'model' }, { field: 'price' }];
+	public columnDefs: ColDef[] = [
+		{ field: 'make', headerName: 'Make' },
+		{
+			field: 'model',
+			headerName: 'Model',
+			editable: true,
+			cellEditor: SelectGridEditorComponent,
+			cellEditorParams: {
+				vegetables: ['Carrot', 'Broccoli', 'Potato'],
+			},
+		},
+		{ field: 'price', headerName: 'Price' },
+	];
 
 	// DefaultColDef sets props common to all Columns
 	public defaultColDef: ColDef = {
 		sortable: true,
 		filter: true,
+	};
+
+	public gridOptions: GridOptions = {
+		suppressClickEdit: false,
+		stopEditingWhenCellsLoseFocus: true,
+		onCellClicked: this.onCellClicked.bind(this),
 	};
 
 	// Data that gets displayed in the grid
