@@ -79,27 +79,31 @@ body {
 	/*
 		Prevent showing a border around a selected cell in ag-grid.
 	*/
-	// .ag-cell-focus,
-	// .ag-cell-no-focus {
-	// 	border: none !important;
-	// }
+	.ag-cell-focus,
+	.ag-cell-no-focus {
+		border: none !important;
+	}
 
-	// .ag-cell:focus {
-	// 	border: none !important;
-	// 	outline: none;
-	// }
+	.ag-cell:focus {
+		border: none !important;
+		outline: none;
+	}
 
 	/*
 		Show a border around the focused row.
 	*/
 
-	.ag-row-focus::after {
-		content: '';
-		inset: 0;
-		position: absolute;
+	.ag-row-focus {
 		box-shadow: inset 0 2px 1px -1px $primary, inset 0 -2px 1px -1px $primary;
-		z-index: 5;
 	}
+
+	// .ag-row-focus::after {
+	// 	content: '';
+	// 	inset: 0;
+	// 	position: absolute;
+	// 	box-shadow: inset 0 2px 1px -1px $primary, inset 0 -2px 1px -1px $primary;
+	// 	z-index: 5;
+	// }
 }
 
 @keyframes fade-in {

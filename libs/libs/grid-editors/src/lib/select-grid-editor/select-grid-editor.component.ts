@@ -29,6 +29,10 @@ import { ICellEditorParams } from 'ag-grid-community';
 			.container:focus {
 				outline: none;
 			}
+
+			mat-card {
+				padding: 0 0.5rem;
+			}
 		`,
 	],
 })

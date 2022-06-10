@@ -75,7 +75,7 @@ type Car = {
 })
 export class AppComponent {
 	themeClasses = ['ag-theme-alpine', 'ag-theme-custom-angular'];
-	themeClass = 'ag-theme-alpine';
+	themeClass = this.themeClasses[1];
 
 	// Each Column Definition results in one Column.
 	public columnDefs: ColDef[] = [
@@ -86,7 +86,7 @@ export class AppComponent {
 			editable: true,
 			cellEditor: SelectGridEditorComponent,
 			cellEditorParams: {
-				vegetables: ['Carrot', 'Broccoli', 'Potato'],
+				vegetables: ['Boxter', 'Celica', 'Mondeo', 'Sierra', 'Venga'],
 			},
 		},
 		{ field: 'price', headerName: 'Price' },

@@ -12,5 +12,5 @@
 		"titleBar.inactiveForeground": "#15202b99"
 	},
 	"peacock.color": "#f9e64f",
-	"cSpell.words": ["craigsh", "ngcc", "nrwl", "plugins", "polyfills", "tabindex", "vars"]
+	"cSpell.words": ["craigsh", "ngcc", "nrwl", "plugins", "polyfills", "sass", "tabindex", "vars"]
 }
