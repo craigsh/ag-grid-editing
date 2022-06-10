@@ -60,7 +60,8 @@
           "browserTarget": "ag-grid-editing:build:production"
         },
         "development": {
-          "browserTarget": "ag-grid-editing:build:development"
+          "browserTarget": "ag-grid-editing:build:development",
+          "port": 4500
         }
       },
       "defaultConfiguration": "development"
