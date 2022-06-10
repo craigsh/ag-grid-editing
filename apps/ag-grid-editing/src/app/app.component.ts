@@ -4,6 +4,12 @@ import { AgGridAngular } from 'ag-grid-angular';
 import { ColDef, GridReadyEvent, CellClickedEvent } from 'ag-grid-community';
 import { Observable } from 'rxjs';
 
+type Car = {
+	make: string;
+	model: string;
+	price: number;
+};
+
 @Component({
 	selector: 'craigsh-root',
 	template: `
@@ -28,6 +34,7 @@ import { Observable } from 'rxjs';
 	styles: [
 		`
 			:host {
+				padding: 0.5rem;
 				display: grid;
 				height: 100%;
 				gap: 1rem;
@@ -47,7 +54,7 @@ export class AppComponent {
 	};
 
 	// Data that gets displayed in the grid
-	public rowData$!: Observable<any[]>;
+	public rowData$!: Observable<Car[]>;
 
 	// For accessing the Grid's API
 	@ViewChild(AgGridAngular) agGrid!: AgGridAngular;
@@ -55,8 +62,9 @@ export class AppComponent {
 	constructor(private http: HttpClient) {}
 
 	// Example load data from sever
+	// eslint-disable-next-line @typescript-eslint/no-unused-vars
 	onGridReady(params: GridReadyEvent) {
-		this.rowData$ = this.http.get<any[]>('https://www.ag-grid.com/example-assets/row-data.json');
+		this.rowData$ = this.http.get<Car[]>('https://www.ag-grid.com/example-assets/row-data.json');
 	}
 
 	// Example of consuming Grid Event
