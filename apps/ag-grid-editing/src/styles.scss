@@ -1,1 +1,24 @@
-/* You can add global styles to this file, and also import other style files */
+@import 'ag-grid-community/dist/styles/ag-grid.css';
+@import 'ag-grid-community/dist/styles/ag-theme-alpine.css';
+
+html,
+body {
+	height: 100%;
+}
+body {
+	margin: 0;
+	font-family: Roboto, 'Helvetica Neue', sans-serif;
+}
+
+/* 
+	Reset box-sizing to border-box for everything (so that the size of an element is the size of its border
+	https://css-tricks.com/box-sizing/
+ */
+html {
+	box-sizing: border-box;
+}
+*,
+*:before,
+*:after {
+	box-sizing: inherit;
+}

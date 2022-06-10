@@ -1,8 +1,8 @@
 {
-  "$schema": "./node_modules/nx/schemas/workspace-schema.json",
-  "version": 2,
-  "projects": {
-    "ag-grid-editing": "apps/ag-grid-editing",
-    "ag-grid-editing-e2e": "apps/ag-grid-editing-e2e"
-  }
+	"$schema": "./node_modules/nx/schemas/workspace-schema.json",
+	"version": 2,
+	"projects": {
+		"ag-grid-editing": "apps/ag-grid-editing",
+		"ag-grid-editing-e2e": "apps/ag-grid-editing-e2e"
+	}
 }
