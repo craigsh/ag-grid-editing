@@ -15,7 +15,7 @@ type Car = {
 	template: `
 		<!-- Button to clear selection -->
 		<div class="buttons">
-			<button (click)="clearSelection()">Clear Selection</button>
+			<button mat-raised-button (click)="clearSelection()">Clear Selection</button>
 		</div>
 
 		<!-- AG Grid Angular Component -->
