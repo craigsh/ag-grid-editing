@@ -3,6 +3,7 @@
 	"version": 2,
 	"projects": {
 		"ag-grid-editing": "apps/ag-grid-editing",
-		"ag-grid-editing-e2e": "apps/ag-grid-editing-e2e"
+		"ag-grid-editing-e2e": "apps/ag-grid-editing-e2e",
+		"libs-grid-editors": "libs/libs/grid-editors"
 	}
 }
