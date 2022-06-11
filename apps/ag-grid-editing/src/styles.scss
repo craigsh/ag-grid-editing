@@ -71,11 +71,6 @@ body {
 
 	--ag-checkbox-checked-color: $accent;
 
-	.ag-row-hover {
-		outline: 1px solid rgba(0, 0, 0, 0.2);
-		outline-offset: -1px;
-	}
-
 	/*
 		Prevent showing a border around a selected cell in ag-grid.
 	*/
@@ -90,20 +85,30 @@ body {
 	}
 
 	/*
-		Show a border around the focused row.
+		Show a top and bottom border on hovered/focused rows.
 	*/
+	.ag-row-focus::after,
+	.ag-row-hover::after {
+		content: '';
+		inset: 0;
+		position: absolute;
+		z-index: 5;
+		pointer-events: none;
+	}
 
-	.ag-row-focus {
+	/*
+		Focus row shows as primary colour.
+	*/
+	.ag-row-focus::after {
 		box-shadow: inset 0 2px 1px -1px $primary, inset 0 -2px 1px -1px $primary;
 	}
 
-	// .ag-row-focus::after {
-	// 	content: '';
-	// 	inset: 0;
-	// 	position: absolute;
-	// 	box-shadow: inset 0 2px 1px -1px $primary, inset 0 -2px 1px -1px $primary;
-	// 	z-index: 5;
-	// }
+	/*
+		Hover row shows as gray.
+	*/
+	.ag-row-hover::after {
+		box-shadow: inset 0 2px 1px -1px rgba(0, 0, 0, 0.3), inset 0 -2px 1px -1px rgba(0, 0, 0, 0.3);
+	}
 }
 
 @keyframes fade-in {
